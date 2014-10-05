@@ -111,8 +111,9 @@ public class HousingInformationPanel extends JPanel {
         this.homeZipCode = new LabeledTextField("Home Zip Code", 5);
 
         ArrayList<String> states = new ArrayList<String>();
-        for(HashMap.Entry<String, State> entry : HousingInformationPanel.LocaleParser.getStatesByShortCode().entrySet()) {
-            states.add(entry.getKey());
+        final HashMap<String, State> statesByShortCode = HousingInformationPanel.LocaleParser.getStatesByShortCode();
+        for(String key : statesByShortCode.keySet()) {
+            states.add(key);
         }
         states.add("");
         Collections.sort(states);
@@ -125,6 +126,8 @@ public class HousingInformationPanel extends JPanel {
                 ArrayList<String> counties = new ArrayList<String>();
                 homeCounty.getDropdown().removeAllItems();
                 homeCounty.getDropdown().setPreferredSize(null);
+
+
                 for (County county : HousingInformationPanel.LocaleParser.getCountiesSetByState().get(state)) {
                     counties.add(county.getName());
                 }
@@ -138,21 +141,22 @@ public class HousingInformationPanel extends JPanel {
                 }
 
                 // TODO: figure out how to resize the country dropdown
-                /*
+
                 Dimension preferredSize = homeCounty.getDropdown().getPreferredSize();
                 preferredSize.height = 15;
                 homeCounty.getDropdown().setPreferredSize(preferredSize);//homeCounty.getDropdown().getPreferredSize());
                 System.out.println(longestString);
-                //homeCounty.getDropdown().setPrototypeDisplayValue(longestString);
+                homeCounty.getDropdown().setPrototypeDisplayValue(longestString);
                 homeCounty.getDropdown().setModel(new DefaultComboBoxModel(counties.toArray()));
                 homeCounty.getDropdown().doLayout();
                 homeCounty.getDropdown().revalidate();
-                homeCounty.getDropdown().repaint();*/
+                homeCounty.getDropdown().repaint();
             }
         });
 
-        this.homeCounty = new LabeledDropdown("Home County", new String[]{});
-        this.homeState.getDropdown().setSelectedItem("WA");
+        String[] initial = { "King County"};
+        this.homeCounty = new LabeledDropdown("Home County", initial);
+         this.homeState.getDropdown().setSelectedItem("WA");
 
         this.isMailingAddressDifferent = new JCheckBox("Is Mailing Address Different?");
         this.isMailingAddressDifferent.addActionListener(new ActionListener() {
@@ -175,9 +179,9 @@ public class HousingInformationPanel extends JPanel {
         this.mailZipCode = new LabeledTextField("Mailing Zip Code", 5);
 
         ArrayList<String> mailStates = new ArrayList<String>();
-        for(HashMap.Entry<String, State> entry : HousingInformationPanel.LocaleParser.getStatesByShortCode().entrySet()) {
-            mailStates.add(entry.getKey());
-        }
+        for(String key : statesByShortCode.keySet()) {
+            mailStates.add(key);
+         }
         mailStates.add("");
         Collections.sort(mailStates);
 

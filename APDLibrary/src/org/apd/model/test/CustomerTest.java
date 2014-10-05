@@ -21,7 +21,14 @@ public class CustomerTest {
                 true, true, StateEmploymentCode.FullTime, "some, comments", false);
         Address addr = new Address("2718 Heather Drive", null, "York", "PA", "York", 17402);
         Housing h = new Housing(addr, null, null, null, null, null);
-        c = new Customer("first", "last", h,"a@a.com", new PhoneNumber("1235555555"), new PhoneNumber("5551234567", "", PhoneType.Mobile), new Date());
+        c = new Customer("first", // String
+                "last",       // String
+                h,          //  Housing
+                "a@a.com",      // String
+                new PhoneNumber("1235555555"),      // PhoneNumber
+                new PhoneNumber("5551234567", "", PhoneType.Mobile),     // PhoneNumber
+                null,null,
+                new Date());       // Date
         System.out.println(c.toCsv());
     }
 }
