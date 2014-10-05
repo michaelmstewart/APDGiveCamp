@@ -42,8 +42,6 @@ public class HousingInformationPanel extends JPanel {
     LabeledTextField phone2;
     LabeledTextField extension1;
     LabeledTextField extension2;
-    String phoneType1;
-    String phoneType2;
     LabeledTextField emergencyContactName;
     LabeledTextField emergencyContactPhone;
     ButtonGroup housingType;
@@ -81,6 +79,7 @@ public class HousingInformationPanel extends JPanel {
         centerPanel.add(this.emergencyContactPhone);
 
         JPanel homeTypeGridBag = new JPanel();
+        centerPanel.add(new JLabel("What type of housing are you currently living in?"));
         homeTypeGridBag.setLayout(new GridLayout(3, 3));
         homeTypeGridBag.setAlignmentX(Component.LEFT_ALIGNMENT);
         homeTypeGridBag.add(this.housingTypeAssistedLiving);
@@ -151,7 +150,7 @@ public class HousingInformationPanel extends JPanel {
             }
         });
 
-        this.homeCounty = new LabeledDropdown("Home County", new String[]{});
+        this.homeCounty = new LabeledDropdown("Home County", new String[]{"starting string"});
         this.homeState.getDropdown().setSelectedItem("WA");
 
         this.isMailingAddressDifferent = new JCheckBox("Is Mailing Address Different?");
@@ -205,7 +204,7 @@ public class HousingInformationPanel extends JPanel {
             }
         });
 
-        this.mailCounty = new LabeledDropdown("Mailing County", new String[]{});
+        this.mailCounty = new LabeledDropdown("Mailing County", new String[]{"          "});
         mailingAddressPanel.add(this.mailAddress1);
         mailingAddressPanel.add(this.mailAddress2);
         mailingAddressPanel.add(this.mailCity);

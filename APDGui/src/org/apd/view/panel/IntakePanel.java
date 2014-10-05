@@ -15,14 +15,18 @@ public class IntakePanel extends JComponent {
     protected SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/YYYY");
 
     HousingInformationPanel housingInformationPanel;
+    AdditionalInformationPanel additionalInformationPanel;
+
     public IntakePanel() {
         this.setName("Intake Form");
         setLayout(new BorderLayout());
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
-        JScrollPane scrollPane = new JScrollPane(centerPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.housingInformationPanel = new HousingInformationPanel();
+        this.additionalInformationPanel = new AdditionalInformationPanel();
         centerPanel.add(this.housingInformationPanel);
+        centerPanel.add(this.additionalInformationPanel);
+        JScrollPane scrollPane = new JScrollPane(centerPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane, BorderLayout.CENTER);
 
         JPanel topPanel = new JPanel();
@@ -112,7 +116,17 @@ public class IntakePanel extends JComponent {
                 this.housingInformationPanel.emergencyContactPhone.getTextField().getText(),
                 new Date(this.date.getTextField().getText()));
 
-        AdditionalInformation additionalInformation = new AdditionalInformation(true, false, true, false, "howLearnedAboutAlliance", "referredFromAgency", CommFormatCode.Braille, true, false, true);
+        AdditionalInformation additionalInformation = new AdditionalInformation(this.additionalInformationPanel.plan504.isSelected(),
+                this.additionalInformationPanel.planIep.isSelected(),
+                this.additionalInformationPanel.isRegisteredVoter.isSelected(),
+                this.additionalInformationPanel.becomeRegisteredVoter.isSelected(),
+                this.additionalInformationPanel.howLearnedAboutAlliance.getTextField().getText(),
+                this.additionalInformationPanel.referredAgency.getTextField().getText(),
+                CommFormatCode.Braille,
+                this.additionalInformationPanel.accessAssistiveTechnology.isSelected(),
+                this.additionalInformationPanel.accessHealthCare.isSelected(),
+                this.additionalInformationPanel.accessTransportation.isSelected());
+
         Demographics demographics = new Demographics(new Date(), GenderType.Male, 69, false, GenderType.Female, 18, 100000.0, MaritalStatusCode.MarriedOrDomesticPartner, true, EthnicityType.AfricanAmericanOrBlack, false, true, false, StateEmploymentCode.OtherEmployment, "demographicComments", false);
         IntakeForm intake = new IntakeForm(customer, additionalInformation, demographics, "intakeComments", false);
         return intake;
