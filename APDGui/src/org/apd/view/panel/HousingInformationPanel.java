@@ -111,8 +111,8 @@ public class HousingInformationPanel extends JPanel {
         this.homeZipCode = new LabeledTextField("Home Zip Code", 5);
 
         ArrayList<String> states = new ArrayList<String>();
-        for(HashMap.Entry<String, State> entry : HousingInformationPanel.LocaleParser.getStatesByShortCode().entrySet()) {
-            states.add(entry.getKey());
+        for(String key : HousingInformationPanel.LocaleParser.getStatesByShortCode().keySet()) {
+            states.add(key);
         }
         states.add("");
         Collections.sort(states);
@@ -175,8 +175,8 @@ public class HousingInformationPanel extends JPanel {
         this.mailZipCode = new LabeledTextField("Mailing Zip Code", 5);
 
         ArrayList<String> mailStates = new ArrayList<String>();
-        for(HashMap.Entry<String, State> entry : HousingInformationPanel.LocaleParser.getStatesByShortCode().entrySet()) {
-            mailStates.add(entry.getKey());
+        for(String key : HousingInformationPanel.LocaleParser.getStatesByShortCode().keySet()) {
+            mailStates.add(key);
         }
         mailStates.add("");
         Collections.sort(mailStates);
