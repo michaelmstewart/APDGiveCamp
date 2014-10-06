@@ -89,4 +89,17 @@ public class AdditionalInformationPanel extends JPanel {
         this.sectionInformation.setHorizontalAlignment(JLabel.CENTER);
         this.sectionInformation.setVerticalAlignment(JLabel.CENTER);
     }
+
+    public void Reset() {
+        this.plan504.setSelected(false);
+        this.planIep.setSelected(false);
+        this.isRegisteredVoter.setSelected(false);
+        this.becomeRegisteredVoter.setSelected(false);
+        this.howLearnedAboutAlliance.reset();
+        this.referredAgency.reset();
+
+        this.accessAssistiveTechnology.setSelected(false);
+        this.accessHealthCare.setSelected(false);
+        this.accessTransportation.setSelected(false);
+    }
 }
