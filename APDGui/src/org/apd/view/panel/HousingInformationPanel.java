@@ -42,8 +42,6 @@ public class HousingInformationPanel extends JPanel {
     LabeledTextField phone2;
     LabeledTextField extension1;
     LabeledTextField extension2;
-    String phoneType1;
-    String phoneType2;
     LabeledTextField emergencyContactName;
     LabeledTextField emergencyContactPhone;
     ButtonGroup housingType;
@@ -81,6 +79,7 @@ public class HousingInformationPanel extends JPanel {
         centerPanel.add(this.emergencyContactPhone);
 
         JPanel homeTypeGridBag = new JPanel();
+        centerPanel.add(new JLabel("What type of housing are you currently living in?"));
         homeTypeGridBag.setLayout(new GridLayout(3, 3));
         homeTypeGridBag.setAlignmentX(Component.LEFT_ALIGNMENT);
         homeTypeGridBag.add(this.housingTypeAssistedLiving);
@@ -111,8 +110,7 @@ public class HousingInformationPanel extends JPanel {
         this.homeZipCode = new LabeledTextField("Home Zip Code", 5);
 
         ArrayList<String> states = new ArrayList<String>();
-        final HashMap<String, State> statesByShortCode = HousingInformationPanel.LocaleParser.getStatesByShortCode();
-        for(String key : statesByShortCode.keySet()) {
+        for(String key : HousingInformationPanel.LocaleParser.getStatesByShortCode().keySet()) {
             states.add(key);
         }
         states.add("");
@@ -126,8 +124,6 @@ public class HousingInformationPanel extends JPanel {
                 ArrayList<String> counties = new ArrayList<String>();
                 homeCounty.getDropdown().removeAllItems();
                 homeCounty.getDropdown().setPreferredSize(null);
-
-
                 for (County county : HousingInformationPanel.LocaleParser.getCountiesSetByState().get(state)) {
                     counties.add(county.getName());
                 }
@@ -141,22 +137,21 @@ public class HousingInformationPanel extends JPanel {
                 }
 
                 // TODO: figure out how to resize the country dropdown
-
+                /*
                 Dimension preferredSize = homeCounty.getDropdown().getPreferredSize();
                 preferredSize.height = 15;
                 homeCounty.getDropdown().setPreferredSize(preferredSize);//homeCounty.getDropdown().getPreferredSize());
                 System.out.println(longestString);
-                homeCounty.getDropdown().setPrototypeDisplayValue(longestString);
+                //homeCounty.getDropdown().setPrototypeDisplayValue(longestString);
                 homeCounty.getDropdown().setModel(new DefaultComboBoxModel(counties.toArray()));
                 homeCounty.getDropdown().doLayout();
                 homeCounty.getDropdown().revalidate();
-                homeCounty.getDropdown().repaint();
+                homeCounty.getDropdown().repaint();*/
             }
         });
 
-        String[] initial = { "King County"};
-        this.homeCounty = new LabeledDropdown("Home County", initial);
-         this.homeState.getDropdown().setSelectedItem("WA");
+        this.homeCounty = new LabeledDropdown("Home County", new String[]{"starting string"});
+        this.homeState.getDropdown().setSelectedItem("WA");
 
         this.isMailingAddressDifferent = new JCheckBox("Is Mailing Address Different?");
         this.isMailingAddressDifferent.addActionListener(new ActionListener() {
@@ -179,9 +174,9 @@ public class HousingInformationPanel extends JPanel {
         this.mailZipCode = new LabeledTextField("Mailing Zip Code", 5);
 
         ArrayList<String> mailStates = new ArrayList<String>();
-        for(String key : statesByShortCode.keySet()) {
+        for(String key : HousingInformationPanel.LocaleParser.getStatesByShortCode().keySet()) {
             mailStates.add(key);
-         }
+        }
         mailStates.add("");
         Collections.sort(mailStates);
 
@@ -208,8 +203,9 @@ public class HousingInformationPanel extends JPanel {
                 }
             }
         });
+        this.homeCounty.getDropdown().setSelectedItem("King");
 
-        this.mailCounty = new LabeledDropdown("Mailing County", new String[]{});
+        this.mailCounty = new LabeledDropdown("Mailing County", new String[]{"          "});
         mailingAddressPanel.add(this.mailAddress1);
         mailingAddressPanel.add(this.mailAddress2);
         mailingAddressPanel.add(this.mailCity);
