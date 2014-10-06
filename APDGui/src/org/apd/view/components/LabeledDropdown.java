@@ -17,6 +17,10 @@ public class LabeledDropdown extends JPanel {
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
+    public void reset() {
+        this.getDropdown().setSelectedIndex(0);
+    }
+
     public JLabel getLabel() {
         return label;
     }

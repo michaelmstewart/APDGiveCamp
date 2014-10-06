@@ -17,6 +17,10 @@ public class LabeledTextField extends JPanel {
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
     }
 
+    public void reset() {
+        this.getTextField().setText("");
+    }
+
     public JLabel getLabel() {
         return label;
     }

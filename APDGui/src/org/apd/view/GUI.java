@@ -54,7 +54,12 @@ public class GUI extends JFrame implements ActionListener {
             // report
             ex.printStackTrace();
         } finally {
-            try {writer.close();} catch (Exception ex) {ex.printStackTrace();}
+            try {
+                writer.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            this.tabContainer.intakePanel.Reset();
         }
     }
 }

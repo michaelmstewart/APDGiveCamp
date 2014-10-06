@@ -131,4 +131,10 @@ public class IntakePanel extends JComponent {
         IntakeForm intake = new IntakeForm(customer, additionalInformation, demographics, "intakeComments", false);
         return intake;
     }
+
+    public void Reset() {
+        this.name.reset();
+        this.housingInformationPanel.Reset();
+        this.additionalInformationPanel.Reset();
+    }
 }

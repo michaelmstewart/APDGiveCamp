@@ -23,6 +23,7 @@ public class HousingInformationPanel extends JPanel {
     LabeledDropdown homeState;
     LabeledTextField homeZipCode;
     LabeledDropdown homeCounty;
+
     JCheckBox isMailingAddressDifferent;
     JPanel mailingAddressPanel;
     LabeledTextField mailAddress1;
@@ -161,7 +162,7 @@ public class HousingInformationPanel extends JPanel {
                 if(box.isSelected()) {
                     mailingAddressPanel.setVisible(true);
                 } else {
-                    mailingAddressPanel.setVisible(false);
+                    resetmailingAddress();
                 }
             }
         });
@@ -225,6 +226,7 @@ public class HousingInformationPanel extends JPanel {
         this.housingTypeDependentOnFamilyOrFriends = new JRadioButton("Dependent on Family/Friends");
         this.housingTypeAssistedLiving = new JRadioButton("Assisted Living");
         this.housingTypeIndependent = new JRadioButton("Independent");
+        this.housingTypeIndependent.setSelected(true);
         this.housingTypeOther = new JRadioButton("Other");
         this.housingTypeRentSubsidized = new JRadioButton("Rent - Subsidized");
         this.housingTypeRentUnsubsidized = new JRadioButton("Rent - Unsubsidized");
@@ -262,5 +264,35 @@ public class HousingInformationPanel extends JPanel {
         // Set Alignments
         this.sectionInformation.setHorizontalAlignment(JLabel.CENTER);
         this.sectionInformation.setVerticalAlignment(JLabel.CENTER);
+    }
+
+    public void Reset() {
+        this.homeAddress1.reset();
+        this.homeAddress2.reset();
+        this.homeCity.reset();
+        this.homeState.getDropdown().setSelectedItem("WA");
+        this.homeZipCode.reset();
+        this.homeCounty.reset();
+        this.isMailingAddressDifferent.setSelected(false);
+        resetmailingAddress();
+        this.email.reset();
+        this.phone1.reset();
+        this.phone2.reset();
+        this.emergencyContactName.reset();
+        this.emergencyContactPhone.reset();
+        this.housingTypeIndependent.setSelected(true);
+        this.timesHomeless.reset();
+        this.lengthRecentHomeless.reset();
+        this.atRiskMovingNursing.setSelected(false);
+    }
+
+    private void resetmailingAddress() {
+        mailingAddressPanel.setVisible(false);
+        this.mailAddress1.reset();
+        this.mailAddress2.reset();
+        this.mailCity.reset();
+        this.mailState.reset();
+        this.mailZipCode.reset();
+        this.mailCounty.reset();
     }
 }
