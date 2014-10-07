@@ -153,6 +153,7 @@ public class HousingInformationPanel extends JPanel {
 
         this.homeCounty = new LabeledDropdown("Home County", new String[]{"starting string"});
         this.homeState.getDropdown().setSelectedItem("WA");
+        this.homeCounty.getDropdown().setSelectedItem("King");
 
         this.isMailingAddressDifferent = new JCheckBox("Is Mailing Address Different?");
         this.isMailingAddressDifferent.addActionListener(new ActionListener() {
@@ -204,7 +205,6 @@ public class HousingInformationPanel extends JPanel {
                 }
             }
         });
-        this.homeCounty.getDropdown().setSelectedItem("King");
 
         this.mailCounty = new LabeledDropdown("Mailing County", new String[]{"          "});
         mailingAddressPanel.add(this.mailAddress1);
@@ -273,7 +273,7 @@ public class HousingInformationPanel extends JPanel {
         this.homeCity.reset();
         this.homeState.getDropdown().setSelectedItem("WA");
         this.homeZipCode.reset();
-        this.homeCounty.reset();
+        this.homeCounty.getDropdown().setSelectedItem("King");
         this.isMailingAddressDifferent.setSelected(false);
         resetmailingAddress();
         this.email.reset();

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="APDLibrary:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/APDLibrary_jar</output-path>
+    <root id="archive" name="APDLibrary.jar">
+      <element id="module-output" name="APDLibrary" />
+    </root>
+  </artifact>
+</component>

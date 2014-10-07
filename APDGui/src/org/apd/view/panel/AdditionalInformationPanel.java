@@ -80,7 +80,7 @@ public class AdditionalInformationPanel extends JPanel {
 
         this.howLearnedAboutAlliance = new LabeledTextField("How did you learn about the Alliance?", 20);
         this.referredAgency = new LabeledTextField("Were you referred from a specific agency? (If so, which)", 15);
-
+        //this.alternateFormats = new JComboBox();
         this.accessAssistiveTechnology = new JCheckBox("Do you have access to any assistive technology you may need?");
         this.accessHealthCare = new JCheckBox("Do you have access to needed health care?");
         this.accessTransportation = new JCheckBox("Do you have access to needed transportation?");

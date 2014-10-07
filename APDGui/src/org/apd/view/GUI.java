@@ -42,15 +42,15 @@ public class GUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         IntakeForm intakeForm = this.tabContainer.intakePanel.OnSubmit();
-        final Customer customer = intakeForm.getCustomer();
+        Customer customer = intakeForm.getCustomer();
         EligibilityForm eligibilityForm = this.tabContainer.eligibilityPanel.OnSubmit(customer);
 
         Writer writer = null;
 
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream("apd_" + customer.getFirstName() + "_" +  customer.getLastName() +
-                            + (new Date()).getTime() + ".csv"), "utf-8"));
+                    new FileOutputStream("apd_" + customer.getFirstName() + "_" +
+                            (new Date()).getTime() + ".csv"), "utf-8"));
             writer.write(intakeForm.toCsv() + "," + eligibilityForm.toCsv() + ",\"" + customer.getEmail() + "\"");
         } catch (IOException ex) {
             // report
