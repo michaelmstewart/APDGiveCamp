@@ -67,13 +67,18 @@ public class IntakePanel extends JComponent {
             mailZipInteger = Integer.parseInt(mailZip);
         }
 
-        String mailCounty = this.housingInformationPanel.mailCounty.getDropdown().getSelectedItem() == null ? "" : this.housingInformationPanel.mailCounty.getDropdown().getSelectedItem().toString();
-        Address mailingAddr = new Address(this.housingInformationPanel.mailAddress1.getTextField().getText(),
-                this.housingInformationPanel.mailAddress2.getTextField().getText(),
-                this.housingInformationPanel.mailCity.getTextField().getText(),
-                this.housingInformationPanel.mailState.getDropdown().getSelectedItem().toString(),
-                mailCounty,
-                mailZipInteger);
+        Address mailingAddr;
+        if(this.housingInformationPanel.isMailingAddressDifferent.isSelected()) {
+            String mailCounty = this.housingInformationPanel.mailCounty.getDropdown().getSelectedItem() == null ? "" : this.housingInformationPanel.mailCounty.getDropdown().getSelectedItem().toString();
+            mailingAddr = new Address(this.housingInformationPanel.mailAddress1.getTextField().getText(),
+                    this.housingInformationPanel.mailAddress2.getTextField().getText(),
+                    this.housingInformationPanel.mailCity.getTextField().getText(),
+                    this.housingInformationPanel.mailState.getDropdown().getSelectedItem().toString(),
+                    mailCounty,
+                    mailZipInteger);
+        } else {
+            mailingAddr = new Address();
+        }
 
         Integer numTimesHomeless = null;
         if (!this.housingInformationPanel.timesHomeless.getTextField().getText().equals("")) {

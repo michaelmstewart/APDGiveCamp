@@ -49,7 +49,7 @@ public class GUI extends JFrame implements ActionListener {
 
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream("apd_" + customer.getFirstName() + "_" +
+                    new FileOutputStream("apd_" + customer.getLastName() + "_" + customer.getFirstName() + "_" +
                             (new Date()).getTime() + ".csv"), "utf-8"));
             writer.write(intakeForm.toCsv() + "," + eligibilityForm.toCsv() + ",\"" + customer.getEmail() + "\"");
         } catch (IOException ex) {
