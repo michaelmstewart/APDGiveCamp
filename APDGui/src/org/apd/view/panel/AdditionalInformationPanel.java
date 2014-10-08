@@ -1,5 +1,6 @@
 package org.apd.view.panel;
 
+import org.apd.view.components.LabeledDropdown;
 import org.apd.view.components.LabeledTextField;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ public class AdditionalInformationPanel extends JPanel {
     JCheckBox becomeRegisteredVoter;
     LabeledTextField howLearnedAboutAlliance;
     LabeledTextField referredAgency;
-
+    LabeledDropdown alternateFormats;
     JCheckBox accessAssistiveTechnology;
     JCheckBox accessHealthCare;
     JCheckBox accessTransportation;
@@ -35,7 +36,7 @@ public class AdditionalInformationPanel extends JPanel {
         centerPanel.add(this.becomeRegisteredVoter);
         centerPanel.add(this.howLearnedAboutAlliance);
         centerPanel.add(this.referredAgency);
-
+        centerPanel.add(this.alternateFormats);
         centerPanel.add(this.accessAssistiveTechnology);
         centerPanel.add(this.accessHealthCare);
         centerPanel.add(this.accessTransportation);
@@ -67,8 +68,8 @@ public class AdditionalInformationPanel extends JPanel {
         this.isRegisteredVoter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JCheckBox box = (JCheckBox)e.getSource();
-                if(box.isSelected()) {
+                JCheckBox box = (JCheckBox) e.getSource();
+                if (box.isSelected()) {
                     becomeRegisteredVoter.setVisible(false);
                     becomeRegisteredVoter.setSelected(false);
                 } else {
@@ -80,7 +81,8 @@ public class AdditionalInformationPanel extends JPanel {
 
         this.howLearnedAboutAlliance = new LabeledTextField("How did you learn about the Alliance?", 20);
         this.referredAgency = new LabeledTextField("Were you referred from a specific agency? (If so, which)", 15);
-        //this.alternateFormats = new JComboBox();
+        this.alternateFormats = new LabeledDropdown("Alternate formats requested", new String[]{"None", "Standard", "Large Print", "Braille",
+                "Audio Tape", "CD", "Email - Standard Email", "Email - Large Print"});
         this.accessAssistiveTechnology = new JCheckBox("Do you have access to any assistive technology you may need?");
         this.accessHealthCare = new JCheckBox("Do you have access to needed health care?");
         this.accessTransportation = new JCheckBox("Do you have access to needed transportation?");
@@ -97,7 +99,7 @@ public class AdditionalInformationPanel extends JPanel {
         this.becomeRegisteredVoter.setSelected(false);
         this.howLearnedAboutAlliance.reset();
         this.referredAgency.reset();
-
+        this.alternateFormats.reset();
         this.accessAssistiveTechnology.setSelected(false);
         this.accessHealthCare.setSelected(false);
         this.accessTransportation.setSelected(false);

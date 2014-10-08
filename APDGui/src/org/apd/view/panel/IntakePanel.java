@@ -121,13 +121,45 @@ public class IntakePanel extends JComponent {
                 this.housingInformationPanel.emergencyContactPhone.getTextField().getText(),
                 new Date(this.date.getTextField().getText()));
 
+        CommFormatCode alternateFormat;
+
+        switch(this.additionalInformationPanel.alternateFormats.getDropdown().getSelectedIndex()) {
+            case 0:
+                alternateFormat = CommFormatCode.None;
+                break;
+            case 1:
+                alternateFormat = CommFormatCode.Standard;
+                break;
+            case 2:
+                alternateFormat = CommFormatCode.LargePrint;
+                break;
+            case 3:
+                alternateFormat = CommFormatCode.Braille;
+                break;
+            case 4:
+                alternateFormat = CommFormatCode.AudioTape;
+                break;
+            case 5:
+                alternateFormat = CommFormatCode.CD;
+                break;
+            case 6:
+                alternateFormat = CommFormatCode.EmailStandard;
+                break;
+            case 7:
+                alternateFormat = CommFormatCode.EmailLargePrint;
+                break;
+            default:
+                alternateFormat = CommFormatCode.None;
+                break;
+        }
+
         AdditionalInformation additionalInformation = new AdditionalInformation(this.additionalInformationPanel.plan504.isSelected(),
                 this.additionalInformationPanel.planIep.isSelected(),
                 this.additionalInformationPanel.isRegisteredVoter.isSelected(),
                 this.additionalInformationPanel.becomeRegisteredVoter.isSelected(),
                 this.additionalInformationPanel.howLearnedAboutAlliance.getTextField().getText(),
                 this.additionalInformationPanel.referredAgency.getTextField().getText(),
-                CommFormatCode.Braille,
+                alternateFormat,
                 this.additionalInformationPanel.accessAssistiveTechnology.isSelected(),
                 this.additionalInformationPanel.accessHealthCare.isSelected(),
                 this.additionalInformationPanel.accessTransportation.isSelected());
