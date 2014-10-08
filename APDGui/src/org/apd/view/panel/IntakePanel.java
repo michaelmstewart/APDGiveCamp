@@ -3,6 +3,10 @@ package org.apd.view.panel;
 import org.apd.model.domain.*;
 import org.apd.model.enums.*;
 import org.apd.view.components.LabeledTextField;
+import org.apd.view.panel.intake.AdditionalInformationPanel;
+import org.apd.view.panel.intake.DemographicInformationPanel;
+import org.apd.view.panel.intake.HousingInformationPanel;
+import org.apd.view.panel.intake.MiscellaneousPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,31 +60,31 @@ public class IntakePanel extends JComponent {
             firstname += nameparts[i] + " ";
         }
         firstname = firstname.trim();
-        String homeZip = this.housingInformationPanel.homeZipCode.getTextField().getText();
+        String homeZip = this.housingInformationPanel.getHomeZipCode().getTextField().getText();
         Integer homeZipInteger = null;
         if (homeZip != null && !homeZip.equals("")) {
             homeZipInteger = Integer.parseInt(homeZip);
         }
-        Address homeAddr = new Address(this.housingInformationPanel.homeAddress1.getTextField().getText(),
-                this.housingInformationPanel.homeAddress2.getTextField().getText(),
-                this.housingInformationPanel.homeCity.getTextField().getText(),
-                this.housingInformationPanel.homeState.getDropdown().getSelectedItem().toString(),
-                this.housingInformationPanel.homeCounty.getDropdown().getSelectedItem().toString(),
+        Address homeAddr = new Address(this.housingInformationPanel.getHomeAddress1().getTextField().getText(),
+                this.housingInformationPanel.getHomeAddress2().getTextField().getText(),
+                this.housingInformationPanel.getHomeCity().getTextField().getText(),
+                this.housingInformationPanel.getHomeState().getDropdown().getSelectedItem().toString(),
+                this.housingInformationPanel.getHomeCounty().getDropdown().getSelectedItem().toString(),
                 homeZipInteger);
 
-        String mailZip = this.housingInformationPanel.mailZipCode.getTextField().getText();
-        Integer mailZipInteger = null;
-        if (mailZip != null && !mailZip.equals("")) {
-            mailZipInteger = Integer.parseInt(mailZip);
-        }
-
         Address mailingAddr;
-        if(this.housingInformationPanel.isMailingAddressDifferent.isSelected()) {
-            String mailCounty = this.housingInformationPanel.mailCounty.getDropdown().getSelectedItem() == null ? "" : this.housingInformationPanel.mailCounty.getDropdown().getSelectedItem().toString();
-            mailingAddr = new Address(this.housingInformationPanel.mailAddress1.getTextField().getText(),
-                    this.housingInformationPanel.mailAddress2.getTextField().getText(),
-                    this.housingInformationPanel.mailCity.getTextField().getText(),
-                    this.housingInformationPanel.mailState.getDropdown().getSelectedItem().toString(),
+        if(this.housingInformationPanel.getIsMailingAddressDifferent().isSelected()) {
+            String mailCounty = this.housingInformationPanel.getMailCounty().getDropdown().getSelectedItem() == null ? "" : this.housingInformationPanel.getMailCounty().getDropdown().getSelectedItem().toString();
+            String mailZip = this.housingInformationPanel.getMailZipCode().getTextField().getText();
+            Integer mailZipInteger = null;
+            if (mailZip != null && !mailZip.equals("")) {
+                mailZipInteger = Integer.parseInt(mailZip);
+            }
+
+            mailingAddr = new Address(this.housingInformationPanel.getMailAddress1().getTextField().getText(),
+                    this.housingInformationPanel.getMailAddress2().getTextField().getText(),
+                    this.housingInformationPanel.getMailCity().getTextField().getText(),
+                    this.housingInformationPanel.getMailState().getDropdown().getSelectedItem().toString(),
                     mailCounty,
                     mailZipInteger);
         } else {
@@ -88,26 +92,26 @@ public class IntakePanel extends JComponent {
         }
 
         Integer numTimesHomeless = null;
-        if (!this.housingInformationPanel.timesHomeless.getTextField().getText().equals("")) {
-            numTimesHomeless = Integer.parseInt(this.housingInformationPanel.timesHomeless.getTextField().getText());
+        if (!this.housingInformationPanel.getTimesHomeless().getTextField().getText().equals("")) {
+            numTimesHomeless = Integer.parseInt(this.housingInformationPanel.getTimesHomeless().getTextField().getText());
         }
 
         HousingType housingType = null;
-        if (this.housingInformationPanel.housingTypeAssistedLiving.isSelected()) {
+        if (this.housingInformationPanel.getHousingTypeAssistedLiving().isSelected()) {
             housingType = HousingType.AssistedLiving;
-        } else if (this.housingInformationPanel.housingTypeDependentOnFamilyOrFriends.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeDependentOnFamilyOrFriends().isSelected()) {
             housingType = HousingType.DependentOnFamilyOrFriends;
-        } else if (this.housingInformationPanel.housingTypeHomeless.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeHomeless().isSelected()) {
             housingType = HousingType.Homeless;
-        } else if (this.housingInformationPanel.housingTypeIndependent.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeIndependent().isSelected()) {
             housingType = HousingType.Independent;
-        } else if (this.housingInformationPanel.housingTypeInstitution.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeInstitution().isSelected()) {
             housingType = HousingType.Institution;
-        } else if (this.housingInformationPanel.housingTypeOther.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeOther().isSelected()) {
             housingType = HousingType.Other;
-        } else if (this.housingInformationPanel.housingTypeRentSubsidized.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeRentSubsidized().isSelected()) {
             housingType = HousingType.RentSubsidized;
-        } else if (this.housingInformationPanel.housingTypeRentUnsubsidized.isSelected()) {
+        } else if (this.housingInformationPanel.getHousingTypeRentUnsubsidized().isSelected()) {
             housingType = HousingType.RentUnsubsidized;
         }
 
@@ -115,21 +119,21 @@ public class IntakePanel extends JComponent {
                 mailingAddr,
                 housingType,
                 numTimesHomeless,
-                this.housingInformationPanel.lengthRecentHomeless.getTextField().getText(),
-                this.housingInformationPanel.atRiskMovingNursing.isSelected());
+                this.housingInformationPanel.getLengthRecentHomeless().getTextField().getText(),
+                this.housingInformationPanel.getAtRiskMovingNursing().isSelected());
 
         Customer customer = new Customer(firstname,
                 lastname,
                 housing,
-                this.housingInformationPanel.email.getTextField().getText(),
-                new PhoneNumber(this.housingInformationPanel.phone1.getTextField().getText()),
-                new PhoneNumber(this.housingInformationPanel.phone2.getTextField().getText(), "", PhoneType.Mobile),
-                this.housingInformationPanel.emergencyContactName.getTextField().getText(),
-                this.housingInformationPanel.emergencyContactPhone.getTextField().getText(),
+                this.housingInformationPanel.getEmail().getTextField().getText(),
+                new PhoneNumber(this.housingInformationPanel.getPhone1().getTextField().getText()),
+                new PhoneNumber(this.housingInformationPanel.getPhone2().getTextField().getText(), "", PhoneType.Mobile),
+                this.housingInformationPanel.getEmergencyContactName().getTextField().getText(),
+                this.housingInformationPanel.getEmergencyContactPhone().getTextField().getText(),
                 new Date(this.date.getTextField().getText()));
 
         CommFormatCode alternateFormat = null;
-        switch(this.additionalInformationPanel.alternateFormats.getDropdown().getSelectedIndex()) {
+        switch(this.additionalInformationPanel.getAlternateFormats().getDropdown().getSelectedIndex()) {
             case 0:
                 alternateFormat = CommFormatCode.None;
                 break;
@@ -156,19 +160,19 @@ public class IntakePanel extends JComponent {
                 break;
         }
 
-        AdditionalInformation additionalInformation = new AdditionalInformation(this.additionalInformationPanel.plan504.isSelected(),
-                this.additionalInformationPanel.planIep.isSelected(),
-                this.additionalInformationPanel.isRegisteredVoter.isSelected(),
-                this.additionalInformationPanel.becomeRegisteredVoter.isSelected(),
-                this.additionalInformationPanel.howLearnedAboutAlliance.getTextField().getText(),
-                this.additionalInformationPanel.referredAgency.getTextField().getText(),
+        AdditionalInformation additionalInformation = new AdditionalInformation(this.additionalInformationPanel.getPlan504().isSelected(),
+                this.additionalInformationPanel.getPlanIep().isSelected(),
+                this.additionalInformationPanel.getIsRegisteredVoter().isSelected(),
+                this.additionalInformationPanel.getBecomeRegisteredVoter().isSelected(),
+                this.additionalInformationPanel.getHowLearnedAboutAlliance().getTextField().getText(),
+                this.additionalInformationPanel.getReferredAgency().getTextField().getText(),
                 alternateFormat,
-                this.additionalInformationPanel.accessAssistiveTechnology.isSelected(),
-                this.additionalInformationPanel.accessHealthCare.isSelected(),
-                this.additionalInformationPanel.accessTransportation.isSelected());
+                this.additionalInformationPanel.getAccessAssistiveTechnology().isSelected(),
+                this.additionalInformationPanel.getAccessHealthCare().isSelected(),
+                this.additionalInformationPanel.getAccessHealthCare().isSelected());
         
         GenderType gender = null;
-        switch (this.demographicInformationPanel.gender.getDropdown().getSelectedIndex()) {
+        switch (this.demographicInformationPanel.getGender().getDropdown().getSelectedIndex()) {
             case 1:
                 gender = GenderType.Male;
                 break;
@@ -181,7 +185,7 @@ public class IntakePanel extends JComponent {
         }
         
         GenderType householdGender = null;
-        switch (this.demographicInformationPanel.headOfHouseGender.getDropdown().getSelectedIndex()) {
+        switch (this.demographicInformationPanel.getHeadOfHouseGender().getDropdown().getSelectedIndex()) {
             case 0:
                 householdGender = GenderType.Male;
                 break;
@@ -194,7 +198,7 @@ public class IntakePanel extends JComponent {
         }
         
         Double grossIncome = null;
-        String grossIncomeText = this.demographicInformationPanel.grossMonthlyIncome.getTextField().getText();
+        String grossIncomeText = this.demographicInformationPanel.getGrossMonthlyIncome().getTextField().getText();
         if(!grossIncomeText.equals("")) {
             if(grossIncomeText.trim().startsWith("$")) {
                 grossIncomeText = grossIncomeText.trim().substring(1);
@@ -208,7 +212,7 @@ public class IntakePanel extends JComponent {
         }
         
         MaritalStatusCode maritalStatus = null;
-        switch (this.demographicInformationPanel.maritalStatus.getDropdown().getSelectedIndex()) {
+        switch (this.demographicInformationPanel.getMaritalStatus().getDropdown().getSelectedIndex()) {
             case 0:
                 maritalStatus = MaritalStatusCode.Single;
                 break;
@@ -227,7 +231,7 @@ public class IntakePanel extends JComponent {
         }
 
         EthnicityType ethnicity = null;
-        switch(this.demographicInformationPanel.ethnicity.getDropdown().getSelectedIndex()) {
+        switch(this.demographicInformationPanel.getEthnicity().getDropdown().getSelectedIndex()) {
             case 0:
                 ethnicity = EthnicityType.AfricanAmericanOrBlack;
                 break;
@@ -255,7 +259,7 @@ public class IntakePanel extends JComponent {
         }
 
         StateEmploymentCode employmentCode = null;
-        switch (this.demographicInformationPanel.workStatus.getDropdown().getSelectedIndex()) {
+        switch (this.demographicInformationPanel.getWorkStatus().getDropdown().getSelectedIndex()) {
             case 0:
                 employmentCode = StateEmploymentCode.FullTime;
                 break;
@@ -282,28 +286,28 @@ public class IntakePanel extends JComponent {
                 break;
         }
 
-        Demographics demographics = new Demographics(new Date(this.demographicInformationPanel.birthdate.getTextField().getText()),
+        Demographics demographics = new Demographics(new Date(this.demographicInformationPanel.getBirthdate().getTextField().getText()),
                 gender,
-                Integer.parseInt(this.demographicInformationPanel.numPeopleLivingInHousehold.getTextField().getText()),
-                this.demographicInformationPanel.singleParentHousehold.isSelected(),
+                Integer.parseInt(this.demographicInformationPanel.getNumPeopleLivingInHousehold().getTextField().getText()),
+                this.demographicInformationPanel.getSingleParentHousehold().isSelected(),
                 householdGender,
-                Integer.parseInt(this.demographicInformationPanel.numChildrenUnder18.getTextField().getText()),
+                Integer.parseInt(this.demographicInformationPanel.getNumChildrenUnder18().getTextField().getText()),
                 grossIncome,
                 maritalStatus,
-                this.demographicInformationPanel.latino.isSelected(),
+                this.demographicInformationPanel.getLatino().isSelected(),
                 ethnicity,
-                this.demographicInformationPanel.limitedEnglish.isSelected(),
-                this.demographicInformationPanel.immigrant.isSelected(),
-                this.demographicInformationPanel.employed.isSelected(),
+                this.demographicInformationPanel.getLimitedEnglish().isSelected(),
+                this.demographicInformationPanel.getImmigrant().isSelected(),
+                this.demographicInformationPanel.getEmployed().isSelected(),
                 employmentCode,
-                this.demographicInformationPanel.demographicComments.getTextField().getText(),
-                this.demographicInformationPanel.military.isSelected());
+                this.demographicInformationPanel.getDemographicComments().getTextField().getText(),
+                this.demographicInformationPanel.getMilitary().isSelected());
         
         IntakeForm intake = new IntakeForm(customer,
                 additionalInformation,
                 demographics,
-                this.miscellaneousPanel.additionalComments.getTextField().getText(),
-                this.miscellaneousPanel.optout.isSelected());
+                this.miscellaneousPanel.getAdditionalComments().getTextField().getText(),
+                this.miscellaneousPanel.getOptout().isSelected());
 
         return intake;
     }
