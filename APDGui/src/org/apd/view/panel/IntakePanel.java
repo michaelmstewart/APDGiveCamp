@@ -16,16 +16,23 @@ public class IntakePanel extends JComponent {
 
     HousingInformationPanel housingInformationPanel;
     AdditionalInformationPanel additionalInformationPanel;
+    DemographicInformationPanel demographicInformationPanel;
+    MiscellaneousPanel miscellaneousPanel;
 
     public IntakePanel() {
         this.setName("Intake Form");
         setLayout(new BorderLayout());
-        JPanel centerPanel = new JPanel();
+        ScrollablePanel centerPanel = new ScrollablePanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.PAGE_AXIS));
+        centerPanel.setAlignmentX(0);
         this.housingInformationPanel = new HousingInformationPanel();
         this.additionalInformationPanel = new AdditionalInformationPanel();
+        this.demographicInformationPanel = new DemographicInformationPanel();
+        this.miscellaneousPanel = new MiscellaneousPanel();
         centerPanel.add(this.housingInformationPanel);
         centerPanel.add(this.additionalInformationPanel);
+        centerPanel.add(this.demographicInformationPanel);
+        centerPanel.add(this.miscellaneousPanel);
         JScrollPane scrollPane = new JScrollPane(centerPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.add(scrollPane, BorderLayout.CENTER);
 
@@ -121,8 +128,7 @@ public class IntakePanel extends JComponent {
                 this.housingInformationPanel.emergencyContactPhone.getTextField().getText(),
                 new Date(this.date.getTextField().getText()));
 
-        CommFormatCode alternateFormat;
-
+        CommFormatCode alternateFormat = null;
         switch(this.additionalInformationPanel.alternateFormats.getDropdown().getSelectedIndex()) {
             case 0:
                 alternateFormat = CommFormatCode.None;
@@ -148,9 +154,6 @@ public class IntakePanel extends JComponent {
             case 7:
                 alternateFormat = CommFormatCode.EmailLargePrint;
                 break;
-            default:
-                alternateFormat = CommFormatCode.None;
-                break;
         }
 
         AdditionalInformation additionalInformation = new AdditionalInformation(this.additionalInformationPanel.plan504.isSelected(),
@@ -163,9 +166,145 @@ public class IntakePanel extends JComponent {
                 this.additionalInformationPanel.accessAssistiveTechnology.isSelected(),
                 this.additionalInformationPanel.accessHealthCare.isSelected(),
                 this.additionalInformationPanel.accessTransportation.isSelected());
+        
+        GenderType gender = null;
+        switch (this.demographicInformationPanel.gender.getDropdown().getSelectedIndex()) {
+            case 1:
+                gender = GenderType.Male;
+                break;
+            case 2:
+                gender = GenderType.Female;
+                break;
+            case 3:
+                gender = GenderType.Unknown;
+                break;
+        }
+        
+        GenderType householdGender = null;
+        switch (this.demographicInformationPanel.headOfHouseGender.getDropdown().getSelectedIndex()) {
+            case 0:
+                householdGender = GenderType.Male;
+                break;
+            case 1:
+                householdGender = GenderType.Female;
+                break;
+            case 2:
+                householdGender = GenderType.Unknown;
+                break;
+        }
+        
+        Double grossIncome = null;
+        String grossIncomeText = this.demographicInformationPanel.grossMonthlyIncome.getTextField().getText();
+        if(!grossIncomeText.equals("")) {
+            if(grossIncomeText.trim().startsWith("$")) {
+                grossIncomeText = grossIncomeText.trim().substring(1);
+            }
+            
+            if(grossIncomeText.trim().endsWith("$")) {
+                grossIncomeText = grossIncomeText.trim().substring(0, grossIncomeText.trim().length() -1);
+            }
+            
+            grossIncome = Double.parseDouble(grossIncomeText);
+        }
+        
+        MaritalStatusCode maritalStatus = null;
+        switch (this.demographicInformationPanel.maritalStatus.getDropdown().getSelectedIndex()) {
+            case 0:
+                maritalStatus = MaritalStatusCode.Single;
+                break;
+            case 1:
+                maritalStatus = MaritalStatusCode.MarriedOrDomesticPartner;
+                break;
+            case 2:
+                maritalStatus = MaritalStatusCode.Separated;
+                break;
+            case 3:
+                maritalStatus = MaritalStatusCode.Divorced;
+                break;
+            case 4:
+                maritalStatus = MaritalStatusCode.Widowed;
+                break;
+        }
 
-        Demographics demographics = new Demographics(new Date(), GenderType.Male, 69, false, GenderType.Female, 18, 100000.0, MaritalStatusCode.MarriedOrDomesticPartner, true, EthnicityType.AfricanAmericanOrBlack, false, true, false, StateEmploymentCode.OtherEmployment, "demographicComments", false);
-        IntakeForm intake = new IntakeForm(customer, additionalInformation, demographics, "intakeComments", false);
+        EthnicityType ethnicity = null;
+        switch(this.demographicInformationPanel.ethnicity.getDropdown().getSelectedIndex()) {
+            case 0:
+                ethnicity = EthnicityType.AfricanAmericanOrBlack;
+                break;
+            case 1:
+                ethnicity = EthnicityType.AmericanIndianOrAlaskaNative;
+                break;
+            case 2:
+                ethnicity = EthnicityType.Asian;
+                break;
+            case 3:
+                ethnicity = EthnicityType.Caucasian;
+                break;
+            case 4:
+                ethnicity = EthnicityType.HispanicOrLatino;
+                break;
+            case 5:
+                ethnicity = EthnicityType.PacificIslanderOrNativeHawaiian;
+                break;
+            case 6:
+                ethnicity = EthnicityType.TwoOrMoreRaces;
+                break;
+            case 7:
+                ethnicity = EthnicityType.OtherOrUnknown;
+                break;
+        }
+
+        StateEmploymentCode employmentCode = null;
+        switch (this.demographicInformationPanel.workStatus.getDropdown().getSelectedIndex()) {
+            case 0:
+                employmentCode = StateEmploymentCode.FullTime;
+                break;
+            case 1:
+                employmentCode = StateEmploymentCode.PartTime;
+                break;
+            case 2:
+                employmentCode = StateEmploymentCode.LookingForAJob;
+                break;
+            case 3:
+                employmentCode = StateEmploymentCode.StudentOrInAProgram;
+                break;
+            case 4:
+                employmentCode = StateEmploymentCode.Retired;
+                break;
+            case 5:
+                employmentCode = StateEmploymentCode.ParticipatingInSegregatedWorkOrDayProgram;
+                break;
+            case 6:
+                employmentCode = StateEmploymentCode.Unknown;
+                break;
+            case 7:
+                employmentCode = StateEmploymentCode.OtherEmployment;
+                break;
+        }
+
+        Demographics demographics = new Demographics(new Date(this.demographicInformationPanel.birthdate.getTextField().getText()),
+                gender,
+                Integer.parseInt(this.demographicInformationPanel.numPeopleLivingInHousehold.getTextField().getText()),
+                this.demographicInformationPanel.singleParentHousehold.isSelected(),
+                householdGender,
+                Integer.parseInt(this.demographicInformationPanel.numChildrenUnder18.getTextField().getText()),
+                grossIncome,
+                maritalStatus,
+                this.demographicInformationPanel.latino.isSelected(),
+                ethnicity,
+                this.demographicInformationPanel.limitedEnglish.isSelected(),
+                this.demographicInformationPanel.immigrant.isSelected(),
+                this.demographicInformationPanel.employed.isSelected(),
+                employmentCode,
+                this.demographicInformationPanel.demographicComments.getTextField().getText(),
+                this.demographicInformationPanel.military.isSelected());
+        
+        IntakeForm intake = new IntakeForm(customer,
+                additionalInformation,
+                demographics,
+                this.miscellaneousPanel.additionalComments.getTextField().getText(),
+                this.miscellaneousPanel.optout.isSelected());
+
         return intake;
     }
 
@@ -173,5 +312,7 @@ public class IntakePanel extends JComponent {
         this.name.reset();
         this.housingInformationPanel.Reset();
         this.additionalInformationPanel.Reset();
+        this.demographicInformationPanel.Reset();
+        this.miscellaneousPanel.Reset();
     }
 }

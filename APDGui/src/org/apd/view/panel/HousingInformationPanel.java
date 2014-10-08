@@ -104,7 +104,7 @@ public class HousingInformationPanel extends JPanel {
 
     private void InitializeComponents() {
         HousingInformationPanel.LocaleParser = new LocaleParser();
-        this.sectionInformation = new JLabel("Contact/HousingInformation");
+        this.sectionInformation = new JLabel("Contact/Housing Information");
         this.homeAddress1 = new LabeledTextField("Home Address Line 1", 20);
         this.homeAddress2 = new LabeledTextField("Home Address Line 2", 20);
         this.homeCity = new LabeledTextField("Home City", 10);

@@ -26,9 +26,10 @@ public class GUI extends JFrame implements ActionListener {
 
     public GUI() {
         setTitle("ADP GUI");
-        setSize(600, 750);
+        setSize(700, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setLayout(new BorderLayout());
 
         JButton submitButton = new JButton("Submit");

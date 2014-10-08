@@ -41,18 +41,6 @@ public class AdditionalInformationPanel extends JPanel {
         centerPanel.add(this.accessHealthCare);
         centerPanel.add(this.accessTransportation);
 
-//        homeTypeGridBag.add(this.housingTypeAssistedLiving);
-//        homeTypeGridBag.add(this.housingTypeDependentOnFamilyOrFriends);
-//        homeTypeGridBag.add(this.housingTypeHomeless);
-//        homeTypeGridBag.add(this.housingTypeIndependent);
-//        homeTypeGridBag.add(this.housingTypeInstitution);
-//        homeTypeGridBag.add(this.housingTypeOther);
-//        homeTypeGridBag.add(this.housingTypeRentSubsidized);
-//        homeTypeGridBag.add(this.housingTypeRentUnsubsidized);
-//        centerPanel.add(this.homelessPanel);
-//
-//        centerPanel.add(this.atRiskMovingNursing);
-
         this.add(this.sectionInformation, BorderLayout.NORTH);
         this.add(centerPanel, BorderLayout.CENTER);
 
