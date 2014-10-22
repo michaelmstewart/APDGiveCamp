@@ -76,9 +76,9 @@ public class HousingInformationPanel extends JPanel {
         centerPanel.add(this.getPhone2());
         centerPanel.add(this.getEmergencyContactName());
         centerPanel.add(this.getEmergencyContactPhone());
+        centerPanel.add(new JLabel("What type of housing are you currently living in?"));
 
         JPanel homeTypeGridBag = new JPanel();
-        centerPanel.add(new JLabel("What type of housing are you currently living in?"));
         homeTypeGridBag.setLayout(new GridLayout(3, 3));
         homeTypeGridBag.setAlignmentX(Component.LEFT_ALIGNMENT);
         homeTypeGridBag.add(this.getHousingTypeAssistedLiving());
@@ -90,8 +90,8 @@ public class HousingInformationPanel extends JPanel {
         homeTypeGridBag.add(this.getHousingTypeRentSubsidized());
         homeTypeGridBag.add(this.getHousingTypeRentUnsubsidized());
         centerPanel.add(homeTypeGridBag);
-        centerPanel.add(this.getHomelessPanel());
 
+        centerPanel.add(this.getHomelessPanel());
         centerPanel.add(this.getAtRiskMovingNursing());
 
         this.add(this.getSectionInformation(), BorderLayout.NORTH);

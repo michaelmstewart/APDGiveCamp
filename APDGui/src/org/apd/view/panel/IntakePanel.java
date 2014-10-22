@@ -286,12 +286,26 @@ public class IntakePanel extends JComponent {
                 break;
         }
 
+        int numHousehold;
+        try {
+            numHousehold = Integer.parseInt(this.demographicInformationPanel.getNumPeopleLivingInHousehold().getTextField().getText());
+        } catch (Exception e) {
+            numHousehold = 1;
+        }
+
+        int numUnder18;
+        try {
+            numUnder18 = Integer.parseInt(this.demographicInformationPanel.getNumChildrenUnder18().getTextField().getText());
+        } catch (Exception e) {
+            numUnder18 = 0;
+        }
+
         Demographics demographics = new Demographics(new Date(this.demographicInformationPanel.getBirthdate().getTextField().getText()),
                 gender,
-                Integer.parseInt(this.demographicInformationPanel.getNumPeopleLivingInHousehold().getTextField().getText()),
+                numHousehold,
                 this.demographicInformationPanel.getSingleParentHousehold().isSelected(),
                 householdGender,
-                Integer.parseInt(this.demographicInformationPanel.getNumChildrenUnder18().getTextField().getText()),
+                numUnder18,
                 grossIncome,
                 maritalStatus,
                 this.demographicInformationPanel.getLatino().isSelected(),

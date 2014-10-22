@@ -63,6 +63,7 @@ public class GUI extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
             this.tabContainer.intakePanel.Reset();
+            this.tabContainer.eligibilityPanel.Reset();
         }
     }
 }
